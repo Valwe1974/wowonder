@@ -2,27 +2,26 @@ import 'package:advstory/advstory.dart';
 import 'package:flutter/material.dart';
 import 'package:wowondertimelineflutterapp/Screens/Stories/NewStorey/mock_story_data.dart';
 
-/// Example of video content.
-class VideoStoryContent extends StatelessWidget {
-  /// Creates [AdvStory] view for video content example.
-  const VideoStoryContent({Key? key}) : super(key: key);
+/// Example of image content.
+class ImageStoryContent extends StatelessWidget {
+  /// Creates [AdvStory] view for image content example.
+  const ImageStoryContent({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AdvStory(
       storyCount: 5,
-      // This example creates only video contents, video sizes are large.
-      // Disable story preload.
-      preloadStory: false,
       storyBuilder: (storyIndex) {
         return Story(
-          contentCount: 2,
+          contentCount: 5,
           contentBuilder: (contentIndex) {
-            return VideoContent(
-              // Story video url
-              url: videoUrls[contentIndex % videoUrls.length],
+            return ImageContent(
+              // Story image url
+              url: imageUrls[contentIndex % imageUrls.length],
+              // Story duration, default is 10 seconds
+              duration: const Duration(seconds: 10),
               // Story content cache key, default is null
-              cacheKey: videoUrls[contentIndex % videoUrls.length],
+              cacheKey: imageUrls[contentIndex % imageUrls.length],
               // Story content request headers, default is null
               requestHeaders: const {
                 "Authorization": "Bearer 12345",
@@ -44,7 +43,7 @@ class VideoStoryContent extends StatelessWidget {
                 ),
               ),
               // Story content timeout, default is null
-              timeout: const Duration(seconds: 10),
+              timeout: const Duration(seconds: 5),
               // Error view builder.
               errorBuilder: () {
                 /// You can create a timer here to skip next content using
@@ -65,12 +64,12 @@ class VideoStoryContent extends StatelessWidget {
             alignment: Alignment.center,
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: Colors.lightBlueAccent.withOpacity(.85),
-              borderRadius: BorderRadius.circular(20),
+              color: Colors.deepOrangeAccent.withOpacity(.85),
+              borderRadius: BorderRadius.circular(8),
             ),
             child: Text(
-              "Video Content\n$storyIndex",
-              style: const TextStyle(fontSize: 12),
+              "Image Content\n$storyIndex",
+              style: const TextStyle(fontSize: 13),
               textAlign: TextAlign.center,
             ),
           ),
