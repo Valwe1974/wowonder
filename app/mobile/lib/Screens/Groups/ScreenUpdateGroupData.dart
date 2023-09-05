@@ -1,20 +1,21 @@
 import 'package:adaptive_action_sheet/adaptive_action_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wowondertimelineflutterapp/Screens/Groups/GroupsScreen.dart';
 import 'package:wowondertimelineflutterapp/ThemesWoWonder.dart';
-import 'package:wowondertimelineflutterapp/Util/Servers/Api/CreateGroupApi.dart';
+import 'package:wowondertimelineflutterapp/Util/Servers/Api/ApiUpdateDataGroups.dart';
 import 'package:wowondertimelineflutterapp/Widget/ScaffoldWidget.dart';
 import 'package:wowondertimelineflutterapp/main.dart';
 
-class CreateGroupScreen extends StatefulWidget {
-  const CreateGroupScreen({super.key});
-
+class ScreenUpdateGroupData extends StatefulWidget {
+  ScreenUpdateGroupData(
+      {required this.ontapEdit, required this.group_id, super.key});
+  String group_id;
+  final ontapEdit;
   @override
-  State<CreateGroupScreen> createState() => _CreateGroupScreenState();
+  State<ScreenUpdateGroupData> createState() => _ScreenUpdateGroupDataState();
 }
 
-class _CreateGroupScreenState extends State<CreateGroupScreen> {
+class _ScreenUpdateGroupDataState extends State<ScreenUpdateGroupData> {
   var ameen22;
   @override
   @override
@@ -22,8 +23,9 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
     super.initState();
   }
 
-  String SelectPrivacy = 'Select Privacy'.tr;
-  String SelectCategory = 'Select Category'.tr;
+  bool back = false;
+  String SelectPrivacy = 'Select Privacy';
+  String SelectCategory = 'Select Category';
   String catid = '0';
   String PrivacyId = '1';
   String namegroupvalue = '';
@@ -44,7 +46,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
 
   Widget build(BuildContext context) {
     return ScaffoldWidget(
-      title: 'Create Group'.tr,
+      title: 'Edit Group'.tr,
       centerTitle: true,
       elevation: 0,
       body: Padding(
@@ -80,21 +82,25 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
               child: Form(
                   child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: [
-                    Text(
-                      '${accounts[0]['sm0']}/',
-                      style: TextStyle(fontWeight: FontWeight.w600),
-                    ),
-                    Container(
-                      width: Get.width * 0.4,
-                      child: TextField(
-                        controller: group_name,
-                        decoration: InputDecoration(
-                            border: InputBorder.none, hintText: 'Group URL'),
+                child: Directionality(
+                  textDirection: TextDirection.ltr,
+                  child: Row(
+                    children: [
+                      Text(
+                        '${accounts[0]['sm0']}/',
+                        style: TextStyle(fontWeight: FontWeight.w600),
                       ),
-                    ),
-                  ],
+                      Container(
+                        width: Get.width * 0.50,
+                        child: TextField(
+                          controller: group_name,
+                          decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: 'Group URL'.tr),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               )),
             ),
@@ -142,119 +148,116 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                               BottomSheetAction(
                                 title: Text('Other'.tr),
                                 onPressed: (BuildContext context) {
-                                  OnTapSelectCategory('Other'.tr, '1');
+                                  OnTapSelectCategory('Other', '1');
                                 },
                               ),
                               BottomSheetAction(
                                 title: Text('Cars and Vehicles'.tr),
                                 onPressed: (BuildContext context) async {
-                                  OnTapSelectCategory(
-                                      'Cars and Vehicles'.tr, '2');
+                                  OnTapSelectCategory('Cars and Vehicles', '2');
                                 },
                               ),
                               BottomSheetAction(
                                 title: Text('Comedy'.tr),
                                 onPressed: (BuildContext context) async {
-                                  OnTapSelectCategory('Comedy'.tr, '3');
+                                  OnTapSelectCategory('Comedy', '3');
                                 },
                               ),
                               BottomSheetAction(
                                 title: Text('Economics and Trade'.tr),
                                 onPressed: (BuildContext context) async {
                                   OnTapSelectCategory(
-                                      'Economics and Trade'.tr, '4');
+                                      'Economics and Trade', '4');
                                 },
                               ),
                               BottomSheetAction(
                                 title: Text('Education'.tr),
                                 onPressed: (BuildContext context) async {
-                                  OnTapSelectCategory('Education'.tr, '5');
+                                  OnTapSelectCategory('Education', '5');
                                 },
                               ),
                               BottomSheetAction(
                                 title: Text('Entertainment'.tr),
                                 onPressed: (BuildContext context) async {
-                                  OnTapSelectCategory('Entertainment'.tr, '6');
+                                  OnTapSelectCategory('Entertainment', '6');
                                 },
                               ),
                               BottomSheetAction(
                                 title: Text('Movies & Animation'.tr),
                                 onPressed: (BuildContext context) async {
                                   OnTapSelectCategory(
-                                      'Movies & Animation'.tr, '7');
+                                      'Movies & Animation', '7');
                                 },
                               ),
                               BottomSheetAction(
                                 title: Text('Gaming'.tr),
                                 onPressed: (BuildContext context) async {
-                                  OnTapSelectCategory('Gaming'.tr, '8');
+                                  OnTapSelectCategory('Gaming', '8');
                                 },
                               ),
                               BottomSheetAction(
                                 title: Text('History and Facts'.tr),
                                 onPressed: (BuildContext context) async {
-                                  OnTapSelectCategory(
-                                      'History and Facts'.tr, '9');
+                                  OnTapSelectCategory('History and Facts', '9');
                                 },
                               ),
                               BottomSheetAction(
                                 title: Text('Live Style'.tr),
                                 onPressed: (BuildContext context) async {
-                                  OnTapSelectCategory('Live Style'.tr, '10');
+                                  OnTapSelectCategory('Live Style', '10');
                                 },
                               ),
                               BottomSheetAction(
                                 title: Text('Natural'.tr),
                                 onPressed: (BuildContext context) async {
-                                  OnTapSelectCategory('Natural'.tr, '11');
+                                  OnTapSelectCategory('Natural', '11');
                                 },
                               ),
                               BottomSheetAction(
                                 title: Text('News and Politics'.tr),
                                 onPressed: (BuildContext context) async {
                                   OnTapSelectCategory(
-                                      'News and Politics'.tr, '12');
+                                      'News and Politics', '12');
                                 },
                               ),
                               BottomSheetAction(
                                 title: Text('People and Nations'.tr),
                                 onPressed: (BuildContext context) async {
                                   OnTapSelectCategory(
-                                      'People and Nations'.tr, '13');
+                                      'People and Nations', '13');
                                 },
                               ),
                               BottomSheetAction(
                                 title: Text('Pets and Animals'.tr),
                                 onPressed: (BuildContext context) async {
-                                  OnTapSelectCategory(
-                                      'Pets and Animals'.tr, '14');
+                                  OnTapSelectCategory('Pets and Animals', '14');
                                 },
                               ),
                               BottomSheetAction(
                                 title: Text('Places and Regions'.tr),
                                 onPressed: (BuildContext context) async {
                                   OnTapSelectCategory(
-                                      'Places and Regions'.tr, '15');
+                                      'Places and Regions', '15');
                                 },
                               ),
                               BottomSheetAction(
                                 title: Text('Science and Technology'.tr),
                                 onPressed: (BuildContext context) async {
                                   OnTapSelectCategory(
-                                      'Science and Technology'.tr, '16');
+                                      'Science and Technology', '16');
                                 },
                               ),
                               BottomSheetAction(
                                 title: Text('Sport'.tr),
                                 onPressed: (BuildContext context) async {
-                                  OnTapSelectCategory('Sport'.tr, '17');
+                                  OnTapSelectCategory('Sport', '17');
                                 },
                               ),
                               BottomSheetAction(
                                 title: Text('Travel and Events'.tr),
                                 onPressed: (BuildContext context) async {
                                   OnTapSelectCategory(
-                                      'Travel and Events'.tr, '18');
+                                      'Travel and Events', '18');
                                 },
                               ),
                             ],
@@ -267,9 +270,9 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              SelectCategory,
+                              SelectCategory.tr,
                               style: TextStyle(
-                                  color: SelectCategory == 'Select Category'.tr
+                                  color: SelectCategory == 'Select Category'
                                       ? Colors.grey
                                       : null),
                             ),
@@ -278,7 +281,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                         ),
                       ))),
             ),
-            if (categoryValue.isNotEmpty) Text('$categoryValue'.tr),
+            if (categoryValue.isNotEmpty) Text(categoryValue),
             SizedBox(height: Get.height * 0.01),
             Container(
               height: Get.height * 0.06,
@@ -301,7 +304,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                                 title: Text('Public'.tr),
                                 onPressed: (BuildContext context) {
                                   setState(() {
-                                    SelectPrivacy = 'Public'.tr;
+                                    SelectPrivacy = 'Public';
                                     PrivacyId = '1';
                                     Get.back();
                                   });
@@ -311,7 +314,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                                 title: Text('Private'.tr),
                                 onPressed: (BuildContext context) async {
                                   setState(() {
-                                    SelectPrivacy = 'Private'.tr;
+                                    SelectPrivacy = 'Private';
                                     PrivacyId = '2';
                                     Get.back();
                                   });
@@ -320,7 +323,6 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                             ],
                             cancelAction: CancelAction(
                                 title: Text('Cancel'
-                                    .tr
                                     .tr)), // onPressed parameter is optional by default will dismiss the ActionSheet
                           );
                         },
@@ -328,9 +330,9 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              SelectPrivacy,
+                              SelectPrivacy.tr,
                               style: TextStyle(
-                                  color: SelectPrivacy == 'Select Privacy'.tr
+                                  color: SelectPrivacy == 'Select Privacy'
                                       ? Colors.grey
                                       : null),
                             ),
@@ -347,8 +349,13 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
             SizedBox(height: Get.height * 0.03),
             InkWell(
               onTap: () async {
-                var creapi = await CreateGroupApi.create(group_name.text,
-                    group_title.text, catid, about.text, PrivacyId);
+                var creapi = await ApiUpditeDataGroups.create(
+                    group_name.text,
+                    group_title.text,
+                    catid,
+                    about.text,
+                    PrivacyId,
+                    widget.group_id);
                 print(creapi);
                 setState(() {
                   if (creapi['errors'] != null) {
@@ -387,13 +394,11 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                       GroupUrlValeue = '';
                     }
                   } else {
-                    Get.back(closeOverlays: true);
-                    Get.back(closeOverlays: true);
-                    Get.to(GroupsScreen(
-                      group_id: creapi['group_data']['id'],
-                    ));
+                    back = true;
                   }
                 });
+                widget.ontapEdit();
+                if (back) Get.back(closeOverlays: true);
               },
               child: Container(
                 decoration: BoxDecoration(
@@ -405,7 +410,13 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                     child: Center(
                         child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text('Create'.tr),
+                      child: Text(
+                        'Edit'.tr,
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                            fontSize: 20),
+                      ),
                     ))),
               ),
             )
