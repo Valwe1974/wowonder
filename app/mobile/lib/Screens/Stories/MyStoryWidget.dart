@@ -4,15 +4,12 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wowondertimelineflutterapp/ThemesWoWonder.dart';
 
-class StroyWidget extends StatelessWidget {
-  StroyWidget(
-      {super.key,
-      required this.images,
-      required this.name,
-      required this.avatir});
+class MyStoryWidget extends StatelessWidget {
+  MyStoryWidget({super.key, required this.images, required this.name});
+
   String images;
   final name;
-  String avatir;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -26,24 +23,27 @@ class StroyWidget extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(1.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                          image:
-                              CachedNetworkImageProvider(images, scale: 1.0))),
+                child: Center(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(100),
+                    child: CachedNetworkImage(
+                      imageUrl: images,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
               ),
               Positioned(
-                  top: 2,
+                  bottom: 2,
                   right: 0,
                   child: CircleAvatar(
-                    maxRadius: 15,
-                    child: Padding(
-                      padding: const EdgeInsets.all(1.0),
-                      child: CircleAvatar(
-                        maxRadius: 15,
-                        backgroundImage: NetworkImage(avatir),
+                    maxRadius: 12,
+                    child: CircleAvatar(
+                      backgroundColor: Colors.black,
+                      child: Icon(
+                        Icons.add,
+                        size: 20,
+                        color: Colors.white,
                       ),
                     ),
                   ))
@@ -59,21 +59,20 @@ class StroyWidget extends StatelessWidget {
   }
 }
 
-class StroyWidgetv2 extends StatelessWidget {
-  StroyWidgetv2(
-      {super.key,
-      required this.images,
-      required this.name,
-      required this.avatir});
+class MyStoryWidgetv2 extends StatelessWidget {
+  MyStoryWidgetv2({super.key, required this.images, required this.name});
+
   String images;
   final name;
-  String avatir;
+
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
-          color: Get.isDarkMode ? ColorDarkBackground : Theme.of(context).scaffoldBackgroundColor),
+          color: Get.isDarkMode
+              ? ColorDarkBackground
+              : Theme.of(context).scaffoldBackgroundColor),
       height: Get.height * 0.16,
       width: Get.width * 0.25,
       child: Column(
@@ -99,25 +98,26 @@ class StroyWidgetv2 extends StatelessWidget {
                   right: 5,
                   left: 5,
                   child: CircleAvatar(
-                    maxRadius: 15,
-                    child: Padding(
-                      padding: const EdgeInsets.all(1.0),
-                      child: CircleAvatar(
-                        maxRadius: 15,
-                        backgroundImage: NetworkImage(avatir),
+                    maxRadius: 12,
+                    child: CircleAvatar(
+                      backgroundColor: ColorTheme,
+                      child: Icon(
+                        Icons.add,
+                        size: 20,
+                        color: Colors.white,
                       ),
                     ),
-                  ))
+                  )),
             ],
           ),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 5),
-            child: Text(
-              name,
-              style: GoogleFonts.cairo(fontWeight: FontWeight.bold),
-              maxLines: 1,overflow: TextOverflow.ellipsis,
-            ),
-          )
+          Padding(
+              padding: EdgeInsets.only(left: 5, right: 5),
+              child: Text(
+                name,
+                style: GoogleFonts.cairo(fontWeight: FontWeight.bold),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              )),
         ],
       ),
     );
