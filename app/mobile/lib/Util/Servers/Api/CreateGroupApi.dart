@@ -1,24 +1,25 @@
-// ApiCreatePage
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:wowondertimelineflutterapp/controllers/SharedPreferences.dart';
 import 'package:wowondertimelineflutterapp/main.dart';
 
-class ApiCreatePage {
+class CreateGroupApi {
   static Future create(
-    String page_name,
-    String page_title,
-    String page_category,
-    String page_description,
+    String group_name,
+    String group_title,
+    String category,
+    String about,
+    String privacy,
   ) async {
-    var url = Uri.parse(accounts[0]['pgc'] + await SharedP.Get('tok'));
+    var url = Uri.parse(accounts[0]['creGo'] + await SharedP.Get('tok'));
     var response = await http.post(url, body: {
       accounts[0]['sm1']: accounts[0]['sm2'],
-      'page_name': page_name,
-      'page_title': page_title,
-      'page_category': page_category,
-      'page_description': page_description,
+      'group_name': group_name,
+      'group_title': group_title,
+      'category': category,
+      'about': about,
+      'privacy': privacy,
     });
 
     var resp = response.body;

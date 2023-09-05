@@ -1,29 +1,26 @@
-// ApiCreatePage
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wowondertimelineflutterapp/controllers/SharedPreferences.dart';
 import 'package:wowondertimelineflutterapp/main.dart';
 
-class ApiCreatePage {
-  static Future create(
-    String page_name,
-    String page_title,
-    String page_category,
-    String page_description,
-  ) async {
-    var url = Uri.parse(accounts[0]['pgc'] + await SharedP.Get('tok'));
+class ApiFrindRequestAccpt {
+  static Future cratepost(String reqq, String use) async {
+    // ignore: unused_local_variable
+    final prefs = await SharedPreferences.getInstance();
+
+    var url = Uri.parse(accounts[0]['accsF'] + await SharedP.Get('tok'));
     var response = await http.post(url, body: {
       accounts[0]['sm1']: accounts[0]['sm2'],
-      'page_name': page_name,
-      'page_title': page_title,
-      'page_category': page_category,
-      'page_description': page_description,
+      accounts[0]['reqq']: reqq,
+      accounts[0]['use']: use,
     });
 
     var resp = response.body;
 
     var json = jsonDecode(resp);
+    print(json);
 
     if (json['api_status'] == 200) {
       return json;

@@ -1,24 +1,17 @@
-// ApiCreatePage
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:wowondertimelineflutterapp/controllers/SharedPreferences.dart';
 import 'package:wowondertimelineflutterapp/main.dart';
 
-class ApiCreatePage {
-  static Future create(
-    String page_name,
-    String page_title,
-    String page_category,
-    String page_description,
+class ApiDownInfo {
+  static Future down(
+    String data,
   ) async {
-    var url = Uri.parse(accounts[0]['pgc'] + await SharedP.Get('tok'));
+    var url = Uri.parse(accounts[0]['don'] + await SharedP.Get('tok'));
     var response = await http.post(url, body: {
       accounts[0]['sm1']: accounts[0]['sm2'],
-      'page_name': page_name,
-      'page_title': page_title,
-      'page_category': page_category,
-      'page_description': page_description,
+      'data': data,
     });
 
     var resp = response.body;
