@@ -316,7 +316,7 @@ class _VideoEditorState extends State<VideoEditor> {
     _isExporting.value = true;
     await _controller.exportVideo(
       onProgress: (stats, value) => _exportingProgress.value = value,
-      onError: (e, s) => _showErrorSnackBar("Error on export video :("),
+      onError: (e, s) => _showErrorSnackBar("Erro ao exportar vídeo: ("),
       onCompleted: (file) async {
         _isExporting.value = false;
         if (!mounted) return;
@@ -328,7 +328,7 @@ class _VideoEditorState extends State<VideoEditor> {
 
   // void _exportCover() async {
   //   await _controller.extractCover(
-  //     onError: (e, s) => _showErrorSnackBar("Error on cover exportation :("),
+  //     onError: (e, s) => _showErrorSnackBar("Erro ao exportar capa: ("),
   //     onCompleted: (cover) {
   //       if (!mounted) return;
   //     },
@@ -446,7 +446,7 @@ class _VideoEditorState extends State<VideoEditor> {
                                       title: ValueListenableBuilder(
                                         valueListenable: _exportingProgress,
                                         builder: (_, double value, __) => Text(
-                                          "Exporting video ${(value * 100).ceil()}%",
+                                          "Exportando vídeo ${(value * 100).ceil()}%",
                                           style: const TextStyle(fontSize: 20),
                                         ),
                                       ),
@@ -477,7 +477,7 @@ class _VideoEditorState extends State<VideoEditor> {
               child: IconButton(
                 onPressed: () => Get.back(),
                 icon: const Icon(Icons.exit_to_app),
-                tooltip: 'Leave editor',
+                tooltip: 'Sair do editor',
               ),
             ),
             const VerticalDivider(endIndent: 22, indent: 22),
@@ -486,7 +486,7 @@ class _VideoEditorState extends State<VideoEditor> {
                 onPressed: () =>
                     _controller.rotate90Degrees(RotateDirection.left),
                 icon: const Icon(Icons.rotate_left),
-                tooltip: 'Rotate unclockwise',
+                tooltip: 'Girar no sentido anti-horário',
               ),
             ),
             Expanded(
@@ -494,14 +494,14 @@ class _VideoEditorState extends State<VideoEditor> {
                 onPressed: () =>
                     _controller.rotate90Degrees(RotateDirection.right),
                 icon: const Icon(Icons.rotate_right),
-                tooltip: 'Rotate clockwise',
+                tooltip: 'Girar no sentido horário',
               ),
             ),
             Expanded(
               child: IconButton(
                 onPressed: () => {},
                 icon: const Icon(Icons.crop),
-                tooltip: 'Open crop screen',
+                tooltip: 'Abrir tela de corte',
               ),
             ),
             const VerticalDivider(endIndent: 22, indent: 22),
